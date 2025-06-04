@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Banco UP - Administrador</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Banco UP</h1>
+  </header>
+  <main class="formulario">
+    <h2>Panel de Administrador</h2>
+
+    <section>
+      <h3>Dar de Alta Usuario</h3>
+      <form>
+        <input type="text" placeholder="Nombre completo" required />
+        <input type="text" placeholder="Usuario" required />
+        <input type="password" placeholder="Contraseña" required />
+        <button type="submit">Crear Usuario</button>
+      </form>
+    </section>
+
+    <section>
+      <h3>Dar de Baja Usuario</h3>
+      <form>
+        <input type="text" placeholder="Usuario a eliminar" required />
+        <button type="submit" class="danger">Eliminar Usuario</button>
+      </form>
+    </section>
+
+    <section>
+      <h3>Consultar Estado de Cuenta</h3>
+      <form>
+        <input type="text" placeholder="Usuario a consultar" required />
+        <button type="submit">Consultar</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
