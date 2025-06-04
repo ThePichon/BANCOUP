@@ -1,0 +1,70 @@
+:root {
+  --rojo-up: #9e1b32;
+  --azul-up: #002147;
+  --blanco: #ffffff;
+  --gris-claro: #f4f4f4;
+  --gris-oscuro: #333;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background-color: var(--gris-claro);
+  color: var(--gris-oscuro);
+}
+
+.container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 2rem;
+  background-color: var(--blanco);
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  color: var(--azul-up);
+  margin-bottom: 1rem;
+}
+
+h2 {
+  color: var(--rojo-up);
+  margin-bottom: 1.5rem;
+}
+
+form input {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  margin: 1rem 0;
+  border: 1px solid var(--gris-oscuro);
+  border-radius: 5px;
+}
+
+form button {
+  background-color: var(--rojo-up);
+  color: var(--blanco);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+form button:hover {
+  background-color: #7e1427;
+}
+
+.transfer-list {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+.transfer-list li {
+  background: var(--gris-claro);
+  padding: 10px;
+  border-left: 5px solid var(--azul-up);
+  margin-bottom: 10px;
+}
