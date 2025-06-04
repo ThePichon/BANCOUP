@@ -104,6 +104,22 @@ button:hover {
   border-radius: 5px;
 }
 
+.btn-volver {
+  margin-top: 2rem;
+  padding: 0.5rem 1rem;
+  background-color: #c8102e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-volver:hover {
+  background-color: #a00d24;
+}
+
+
 @media (max-width: 600px) {
   .actions {
     flex-direction: column;

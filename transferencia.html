@@ -8,15 +8,16 @@
 </head>
 <body>
   <header>
-    <h1>Banco UP</h1>
+    <h1><a href="index.html">Banco UP</a></h1>
   </header>
   <main class="formulario">
     <h2>Realizar Transferencia</h2>
     <form>
-      <input type="number" placeholder="Cantidad a transferir" required />
       <input type="text" placeholder="Número de cuenta destino" required />
-      <button type="submit">Transferir</button>
+      <input type="number" placeholder="Cantidad a transferir" min="1" required />
+      <button type="submit">Enviar Transferencia</button>
     </form>
+    <button onclick="history.back()" class="btn-volver">← Regresar</button>
   </main>
 </body>
 </html>

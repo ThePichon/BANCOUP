@@ -3,21 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Banco UP - Saldo</title>
+  <title>Banco UP - Estado de Cuenta</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
-    <h1>Banco UP</h1>
+    <h1><a href="index.html">Banco UP</a></h1>
   </header>
-  <main class="estado-cuenta">
-    <h2>Mi Cuenta</h2>
-    <p><strong>Saldo disponible:</strong> $12,345.67</p>
-    <h3>Transferencias Realizadas</h3>
-    <ul class="transferencias">
-      <li>A Juan Pérez - $500.00</li>
-      <li>A María López - $1,200.00</li>
-    </ul>
+  <main class="estado">
+    <h2>Tu Estado de Cuenta</h2>
+
+    <section class="saldo">
+      <h3>Saldo Disponible:</h3>
+      <p>$15,000.00</p> <!-- esto lo actualizas dinámicamente con tu script -->
+    </section>
+
+    <section class="movimientos">
+      <h3>Historial de Transferencias</h3>
+      <ul>
+        <li>→ $500.00 a cuenta 123456 (01/06/2025)</li>
+        <li>← $1,200.00 de cuenta 789012 (28/05/2025)</li>
+        <li>→ $300.00 a cuenta 456789 (24/05/2025)</li>
+        <!-- y así dinámicamente -->
+      </ul>
+    </section>
+
+    <button onclick="history.back()" class="btn-volver">← Regresar</button>
   </main>
 </body>
 </html>
