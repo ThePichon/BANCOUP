@@ -12,16 +12,51 @@
   </header>
   <main class="formulario">
     <h2>Iniciar Sesión</h2>
-    <form>
-      <select required>
-        <option value="">Selecciona tipo de usuario</option>
-        <option value="cliente">Cliente</option>
-        <option value="admin">Administrador</option>
-      </select>
-      <input type="text" placeholder="Usuario" required />
-      <input type="password" placeholder="Contraseña" required />
-      <button type="submit">Entrar</button>
-    </form>
+<form onsubmit="login(event)">
+  <select id="tipo" required>
+    <option value="">Selecciona tipo de usuario</option>
+    <option value="cliente">Cliente</option>
+    <option value="admin">Administrador</option>
+  </select>
+  <input type="text" id="email" placeholder="Usuario" required />
+  <input type="password" id="password" placeholder="Contraseña" required />
+  <button type="submit">Entrar</button>
+</form>
+<p id="mensaje" style="color:red;"></p>
+
+<script>
+  async function login(e) {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const tipo = document.getElementById("tipo").value;
+
+    const response = await fetch("login.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await response.json();
+    const mensaje = document.getElementById("mensaje");
+
+    if (data.success) {
+      sessionStorage.setItem("cuenta", data.numero_cuenta); // <<--- guardar cuenta
+      mensaje.style.color = "green";
+      mensaje.innerText = "✅ Bienvenido";
+
+      setTimeout(() => {
+        window.location.href = tipo === "admin" ? "admin.html" : "index.html";
+      }, 1000);
+    } else {
+      mensaje.style.color = "red";
+      mensaje.innerText = data.error;
+    }
+  }
+</script>
+
+
     <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
   </main>
 </body>

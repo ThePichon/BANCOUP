@@ -12,12 +12,43 @@
   </header>
   <main class="formulario">
     <h2>Realizar Transferencia</h2>
-    <form>
-      <input type="text" placeholder="Número de cuenta destino" required />
-      <input type="number" placeholder="Cantidad a transferir" min="1" required />
+    <form onsubmit="enviarTransferencia(event)">
+      <input type="text" id="cuenta_destino" placeholder="Número de cuenta destino" required />
+      <input type="number" id="monto" placeholder="Cantidad a transferir" min="500" required />
+      <input type="text" id="concepto" placeholder="Concepto de la transferencia" required />
       <button type="submit">Enviar Transferencia</button>
     </form>
+<p id="resultado" style="margin-top: 10px; font-weight: bold;"></p>
+
     <button onclick="history.back()" class="btn-volver">← Regresar</button>
   </main>
 </body>
 </html>
+<script>
+async function enviarTransferencia(e) {
+  e.preventDefault();
+
+  const cuenta_origen = "1001000001"; // aquí puedes usar sessionStorage o valor dinámico
+  const cuenta_destino = document.getElementById("cuenta_destino").value;
+  const monto = parseFloat(document.getElementById("monto").value);
+  const concepto = document.getElementById("concepto").value;
+  const resultado = document.getElementById("resultado");
+
+  const res = await fetch("transferir.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ cuenta_origen, cuenta_destino, monto, concepto })
+  });
+
+  const data = await res.json();
+
+  if (data.error) {
+    resultado.style.color = "red";
+    resultado.innerText = "❌ " + data.error;
+  } else {
+    resultado.style.color = "green";
+    resultado.innerText = `✅ Transferencia realizada\n\nSaldo origen: ${data.origen.despues}\nSaldo destino: ${data.destino.despues}`;
+  }
+}
+</script>
+

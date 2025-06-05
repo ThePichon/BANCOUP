@@ -15,20 +15,63 @@
 
     <section class="saldo">
       <h3>Saldo Disponible:</h3>
-      <p>$15,000.00</p> <!-- esto lo actualizas dinámicamente con tu script -->
+      <p id="saldo"></p>
     </section>
 
     <section class="movimientos">
       <h3>Historial de Transferencias</h3>
-      <ul>
-        <li>→ $500.00 a cuenta 123456 (01/06/2025)</li>
-        <li>← $1,200.00 de cuenta 789012 (28/05/2025)</li>
-        <li>→ $300.00 a cuenta 456789 (24/05/2025)</li>
-        <!-- y así dinámicamente -->
+      <ul id="historial">
       </ul>
+
     </section>
 
     <button onclick="history.back()" class="btn-volver">← Regresar</button>
   </main>
+  <script>
+    
+  if (!sessionStorage.getItem("cuenta")) {
+    alert("Debes iniciar sesión");
+    window.location.href = "login.html";
+  }
+async function cargarSaldo() {
+  const cuenta = sessionStorage.getItem("cuenta"); 
+  const res = await fetch("saldo.php?cuenta=" + cuenta);
+  const data = await res.json();
+  document.getElementById("saldo").innerText = data.saldo
+    ? `$${data.saldo.toFixed(2)}`
+    : "❌ " + data.error;
+}
+
+cargarSaldo();
+</script>
+<script>
+async function cargarHistorial() {
+  const cuenta = sessionStorage.getItem("cuenta"); 
+  const res = await fetch("historial.php?cuenta=" + cuenta);
+  const data = await res.json();
+  const lista = document.getElementById("historial");
+
+  if (data.error) {
+    lista.innerHTML = `<li>${data.error}</li>`;
+    return;
+  }
+
+  lista.innerHTML = ""; // Limpiar
+  for (const mov of data) {
+    const fecha = new Date(mov.fecha_hora).toLocaleDateString();
+    const tipo = mov.cuenta_origen === cuenta ? "→" : "←";
+    const otro = mov.cuenta_origen === cuenta ? mov.cuenta_destino : mov.cuenta_origen;
+    const color = tipo === "→" ? "red" : "green";
+    const li = document.createElement("li");
+    li.textContent = `${tipo} $${mov.monto.toFixed(2)} ${tipo === "→" ? "a" : "de"} cuenta ${otro} (${fecha})`;
+    li.style.color = color;
+    lista.appendChild(li);
+  }
+}
+
+cargarSaldo();     // ya la tienes
+cargarHistorial(); // nueva
+</script>
+
 </body>
 </html>
